@@ -80,6 +80,7 @@ def home():
             """
             return jsonify({'status': 0}), 200
         file = request.files['file']
+        print('get', file.filename)
         # 保存文件到本地，解压缩
         file.save(f"./data/{file.filename}")
         # 发来的是一个数据包 

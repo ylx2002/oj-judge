@@ -27,9 +27,10 @@ data = {
 response = requests.post(Url_OJ_Back, data=data)
 ```
 
-## 测试数据
+## 测试数据格式
 
-放到 `Scheduler/data` 中，zip 格式，命名为{题目编号}.zip
+测试数据为 zip 格式，命名为{题目编号}.zip
+
 压缩包内文件格式：
 ```
 {题目编号}
@@ -46,6 +47,14 @@ config 格式
 2
 ```
 第一行，时间限制，单位 ms；第二行，空间限制，单位 MB；第三行，测试点数量。
+
+上传：
+```python
+    files = {
+        'file': open('{题目编号}.zip', 'rb')
+        } # 发评测数据
+    result = requests.post('http://localhost:8100', files=files)
+```
 
 ## 运行
 
