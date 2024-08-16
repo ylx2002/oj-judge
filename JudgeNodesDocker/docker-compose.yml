@@ -1,0 +1,31 @@
+version: '3.3'
+
+services:
+  container1:
+    build: .
+    container_name: container1
+    ports:
+      - "8101:8001"  # 将宿主机的8101端口映射到容器的8001端口
+    volumes:
+      - ./JudgeNodes1:/app/JudgeInfo
+
+  container2:
+    build: .
+    container_name: container2
+    ports:
+      - "8102:8001"  # 将宿主机的8102端口映射到容器的8001端口
+    volumes:
+      - ./JudgeNodes2:/app/JudgeInfo
+
+  container3:
+    build: .
+    container_name: container3
+    ports:
+      - "8103:8001"  # 将宿主机的8103端口映射到容器的8001端口
+    volumes:
+      - ./JudgeNodes3:/app/JudgeInfo
+
+volumes:
+  JudgeNodes1:
+  JudgeNodes2:
+  JudgeNodes3:
