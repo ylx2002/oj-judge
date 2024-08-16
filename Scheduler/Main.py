@@ -41,10 +41,10 @@ def run_judge_tasks(Url, pid, data, id):
     # data=data
     time.sleep(0.005)
     print(data['rid'], id)
-    files = {'file': open(FilePath+str(pid)+'.zip', 'rb')}
-    print(files)
-    result = requests.post(Url, files=files, data=data)
-    print(result.json())
+    files = {'file': open(FilePath+str(pid)+'.zip', 'rb')} # 发评测数据
+    # print(files)
+    result = requests.post(Url, files=files, data=data) # 评测
+    # print(result.json())
     NodesStatus[id] = 0
     return_result({'status':0,'result':result})
     return 0
@@ -70,13 +70,14 @@ def home():
             # 发来的是一个评测请求
             data = request.json
             # print(data)
-            Thread = threading.Thread(target = distribution_tasks, args = ('P1', data))
+            Thread = threading.Thread(target = distribution_tasks, args = (data['pid'], data))
             Thread.start()
             """
             data = {
                 "pid": "P1",
                 "rid": "R1",
                 "code": "..."
+                "opt": "..."
             }
             """
             return jsonify({'status': 0}), 200
