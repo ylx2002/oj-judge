@@ -27,6 +27,26 @@ data = {
 response = requests.post(Url_OJ_Back, data=data)
 ```
 
+## 测试数据
+
+放到 `Scheduler/data` 中，zip 格式，命名为{题目编号}.zip
+压缩包内文件格式：
+```
+{题目编号}
+|
+|-----config
+|-----1.in
+|-----1.ans
+|-----......
+```
+config 格式
+```
+1000
+512
+2
+```
+第一行，时间限制，单位 ms；第二行，空间限制，单位 MB；第三行，测试点数量。
+
 ## 运行
 
 在 `JudgeNodesDocker` 中开评测机
