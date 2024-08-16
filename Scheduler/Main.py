@@ -6,7 +6,7 @@ import zipfile
 from io import BytesIO
 import json
 
-FilePath = r'./data/'
+FilePath = r'./data/' # 数据包地址
 NodesStatus = []  # 0:空闲
 Ports = []
 
@@ -37,8 +37,6 @@ def return_result(data):
    return response.text
 
 def run_judge_tasks(Url, pid, data, id):
-    # files=FilePath+str(pid)+'.zip'
-    # data=data
     time.sleep(0.005)
     print(data['rid'], id)
     files = {'file': open(FilePath+str(pid)+'.zip', 'rb')} # 发评测数据
@@ -81,7 +79,9 @@ def home():
             }
             """
             return jsonify({'status': 0}), 200
-
+        file = request.files['file']
+        # 保存文件到本地，解压缩
+        file.save(f"./data/{file.filename}")
         # 发来的是一个数据包 
         return jsonify({'status': 0}), 200
     
