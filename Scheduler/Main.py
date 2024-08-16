@@ -30,7 +30,7 @@ for i in range(N):
 """
 
 JudgeThreads = []
-Url_OJ_Back = 'http://localhost:8099'
+Url_OJ_Back = 'http://localhost:8099' # 后端Url
 
 def return_result(data):
    response = requests.post(Url_OJ_Back, data=data)
