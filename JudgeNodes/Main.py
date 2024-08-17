@@ -21,9 +21,9 @@ def judge():
     x=run.Compile(str(rid)) # 编译记录号为 R1 的程序
     result = run.Run(str(rid),str(pid))
     print(result)
-    import time
-    time.sleep(5)
-    return jsonify({'result': result}), 200
+    # import time
+    # time.sleep(5)
+    return jsonify({'result': result, 'rid' : str(rid)}), 200
 
 
 @app.route('/', methods=['GET', 'POST'])

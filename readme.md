@@ -21,8 +21,9 @@ result 是一个list，表示若干个测试点的评测状态。
 
 ```python
 data = {
-    'status':0,
-    'result':result
+    'status': 0,
+    'rid':'R1',
+    'result': 0
 }
 response = requests.post(Url_OJ_Back, data=data)
 ```

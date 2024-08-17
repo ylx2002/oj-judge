@@ -33,6 +33,7 @@ JudgeThreads = []
 Url_OJ_Back = 'http://localhost:8099' # 后端Url
 
 def return_result(data):
+   print(data)
    response = requests.post(Url_OJ_Back, data=data)
    return response.text
 
@@ -42,9 +43,17 @@ def run_judge_tasks(Url, pid, data, id):
     files = {'file': open(FilePath+str(pid)+'.zip', 'rb')} # 发评测数据
     # print(files)
     result = requests.post(Url, files=files, data=data) # 评测
-    # print(result.json())
+    print(result.json())
     NodesStatus[id] = 0
-    return_result({'status':0,'result':result})
+    x=result.json()['result']
+    Result= {'status':0,'rid':data['rid']}
+    flag = 0
+    for i in x:
+        if (i != 0):
+            flag = i
+    Result['result'] = flag
+    # print(Result)
+    return_result(Result)
     return 0
 
 def distribution_tasks(pid, data): # 分发评测给空闲评测机
