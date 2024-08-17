@@ -30,6 +30,8 @@ for i in range(N):
 """
 
 JudgeThreads = []
+
+# Url_OJ_Back = 'http://127.0.0.1:8001' # 后端Url
 Url_OJ_Back = 'http://127.0.0.1:8001/record/update' # 后端Url
 
 def return_result(data):
@@ -38,7 +40,7 @@ def return_result(data):
    return response.text
 
 def run_judge_tasks(Url, pid, data, id):
-    time.sleep(0.005)
+    time.sleep(0.002)
     print(data['rid'], id, data['language'])
     files = {'file': open(FilePath+str(pid)+'.zip', 'rb')} # 发评测数据
     # print(files)
@@ -64,7 +66,7 @@ def distribution_tasks(pid, data): # 分发评测给空闲评测机
         data['language'] = 'c++'
     print(data['language'])
     while True:
-        time.sleep(0.001)
+        time.sleep(0.002)
         for i in range(0, Num):
             # print('now', i)
             if NodesStatus[i] == 0:

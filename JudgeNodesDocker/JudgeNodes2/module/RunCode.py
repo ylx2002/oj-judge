@@ -35,7 +35,7 @@ def Run(rid, pid, lang = 'c++'):# rid:记录编号 pid:题目编号
 
     for i in range(1, TestCount + 1):
         # 运行测试点 i 
-        
+        flag = 0 
         try:
 
             with open(ProblemPath + str(i) + '.in', 'r') as infile, \
@@ -48,11 +48,12 @@ def Run(rid, pid, lang = 'c++'):# rid:记录编号 pid:题目编号
                     Tmp = subprocess.run([r'./submissions/' + str(rid)], 
                                         stdin=infile, stdout=outfile,
                                         capture_output=False, text=True, timeout=TimeLimit * 2/1000, preexec_fn=SetMemoryLimit(MemoryLimit))
+                    flag = Tmp.returncode
                 elif lang == 'python':
                     Tmp = subprocess.run(['python', r'./submissions/' + str(rid) + '.py'], 
                                         stdin=infile, stdout=outfile,
                                         capture_output=False, text=True, timeout=TimeLimit * 2/1000, preexec_fn=SetMemoryLimit(MemoryLimit))
-             
+                    flag = Tmp.returncode
                 end_time = time.time()
                 
         except subprocess.TimeoutExpired:
@@ -68,7 +69,7 @@ def Run(rid, pid, lang = 'c++'):# rid:记录编号 pid:题目编号
             RunResult.append(70) # TLE
             continue
 
-        if (Tmp.returncode != 0):
+        if (flag != 0):
             RunResult.append(50) # RE
             continue
         # 忽略行末空格、换行进行比较
