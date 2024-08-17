@@ -31,13 +31,19 @@ for i in range(N):
 
 JudgeThreads = []
 
-# Url_OJ_Back = 'http://127.0.0.1:8001' # 后端Url
-Url_OJ_Back = 'http://127.0.0.1:8001/record/update' # 后端Url
+Url_OJ_Back = 'http://127.0.0.1:8001' # 后端Url
+# Url_OJ_Back = 'http://127.0.0.1:8001/record/update' # 后端Url
 
 def return_result(data):
-   print(data)
-   response = requests.post(Url_OJ_Back, data=data)
-   return response.text
+    headers = {
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwiYXV0aCI6MjAsImV4cCI6MTcyNTExNDEyN30.MhGbdSc6Hfazf8L1utBmNVR_TUHeyzYilFxRHJrLmnA",  # 替换为实际的令牌
+        "Content-Type": "application/json",
+    }
+    # data["status"] = data["result"]
+    data['result'] = int(data['result'])
+    print(data)
+    response = requests.post(Url_OJ_Back, json=data,headers=headers)
+    return response.text
 
 def run_judge_tasks(Url, pid, data, id):
     time.sleep(0.002)
