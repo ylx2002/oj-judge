@@ -77,7 +77,7 @@ def home():
             # 发来的是一个评测请求
             data = request.json
             # print(data)
-            Thread = threading.Thread(target = distribution_tasks, args = (data['pid'], data))
+            Thread = threading.Thread(target = distribution_tasks, args = (str(data['pid']), data))
             Thread.start()
             """
             data = {
