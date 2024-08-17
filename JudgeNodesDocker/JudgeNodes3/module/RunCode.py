@@ -32,7 +32,7 @@ def Run(rid, pid, lang = 'c++'):# rid:记录编号 pid:题目编号
         TimeLimit,MemoryLimit,TestCount = [int(i) for i in file.read().split()]
     
     RunResult=[] #  30 AC 40 WA 50 RE 70 TLE 60 MLE 90 UKE 80 CE
-
+    Time = 0
     for i in range(1, TestCount + 1):
         # 运行测试点 i 
         flag = 0 
@@ -57,12 +57,14 @@ def Run(rid, pid, lang = 'c++'):# rid:记录编号 pid:题目编号
                 end_time = time.time()
                 
         except subprocess.TimeoutExpired:
-            RunResult.append(70) # TLE
+            RunResult.append(70) # TLE 
+            Time = TimeLimit * 2
             continue
         except Exception as e:
             RunResult.append(50) # RE
             continue
 
+        Time = max(Time, end_time - start_time)
         # print(Tmp,'\n',end_time-start_time)
             
         if (end_time-start_time)*1000 > TimeLimit:
@@ -80,7 +82,7 @@ def Run(rid, pid, lang = 'c++'):# rid:记录编号 pid:题目编号
         else:
             RunResult.append(40)
         
-    return RunResult
+    return {'runtime':int(Time), 'result':RunResult}
 
 # x=run.Compile('R1') # 编译记录号为 R1 的程序
 # run.Run('R1','P1') # 运行记录号为 R1，题号为 P1 的程序 

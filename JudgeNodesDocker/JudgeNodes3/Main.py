@@ -33,7 +33,7 @@ def judge():
     print(result)
     # import time
     # time.sleep(5)
-    return jsonify({'result': result, 'rid' : str(rid)}), 200
+    return jsonify({'runtime':result['runtime'],'result': result['result'], 'rid' : str(rid)}), 200
 
 
 @app.route('/', methods=['GET', 'POST'])
