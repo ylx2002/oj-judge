@@ -16,10 +16,20 @@ def judge():
     code = session.get('code', {}) 
     rid = session.get('rid', {}) 
     pid = session.get('pid', {}) 
-    with open('./submissions/'+str(rid)+'.cpp', 'w') as file:
-        file.write(code)
-    x=run.Compile(str(rid)) # 编译记录号为 R1 的程序
-    result = run.Run(str(rid),str(pid))
+    lang = session.get('language', {})
+    print(lang)
+    if lang == 'c++':    
+        with open('./submissions/'+str(rid)+'.cpp', 'w') as file:
+            file.write(code)
+        x=run.Compile(str(rid)) # 编译记录号为 R1 的程序
+        if x.returncode == 1: # CE
+            return jsonify({'result': ['80'], 'rid' : str(rid)}), 200
+
+    if lang == 'python':
+        with open('./submissions/'+str(rid)+'.py', 'w') as file:
+            file.write(code) 
+    
+    result = run.Run(str(rid),str(pid),lang)
     print(result)
     # import time
     # time.sleep(5)
@@ -38,6 +48,7 @@ def home():
         session['code'] = data['code']
         session['pid'] = data['pid']
         session['rid'] = data['rid']
+        session['language'] = data['language']
 
         @after_this_request
         def redirect_to_judge(response):
@@ -51,7 +62,7 @@ def home():
         try:
             with zipfile.ZipFile(zip_path, 'r') as zip_ref:
                 zip_ref.extractall(extract_to)
-            CompileResult = subprocess.run(['rm','-r',zip_path], capture_output=True, text=True)
+            RmResult = subprocess.run(['rm','-r',zip_path], capture_output=True, text=True)
             # print(CompileResult)
             return "File and data received!", 200
         except zipfile.BadZipFile:

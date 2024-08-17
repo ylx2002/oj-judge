@@ -39,7 +39,7 @@ def return_result(data):
 
 def run_judge_tasks(Url, pid, data, id):
     time.sleep(0.005)
-    print(data['rid'], id)
+    print(data['rid'], id, data['language'])
     files = {'file': open(FilePath+str(pid)+'.zip', 'rb')} # 发评测数据
     # print(files)
     result = requests.post(Url, files=files, data=data) # 评测
@@ -58,6 +58,11 @@ def run_judge_tasks(Url, pid, data, id):
 
 def distribution_tasks(pid, data): # 分发评测给空闲评测机
     Num = len(NodesStatus)
+    if not('language' in data): # 设一个default
+        data['language'] = 'c++'
+    if data['language'] == 'C++' or data['language'] == 'cpp':
+        data['language'] = 'c++'
+    print(data['language'])
     while True:
         time.sleep(0.001)
         for i in range(0, Num):

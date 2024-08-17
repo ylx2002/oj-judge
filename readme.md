@@ -2,22 +2,26 @@
 opt 传编译选项，-O2 默认开。如果要不开 O2，需要传一个空 list。（暂时没写，无效果）
 端口是 8100 放调度程序，810x 是评测机
 
+只支持 c++ 和 python（全部小写）
+
 ```python
 data = {
     "pid": "P1",
     "rid": "R3",
-    "code": "#include <iostream>\nusing namespace std;\nint main() {\n    int a, b, c;\n    cin >> a >> b;\n    c = a + b * 2;\n    cout << c;\n    return 0;\n}\n// test"
+    "language": "c++",
+    "code": "#include <iostream>\nusing namespace std;\nint main() {\n    int a, b, c;\n    cin >> a >> b;\n    c = a + b * 2;\n    cout << c;\n    return 0;\n}\n// test",
     "opt": ['-std=c++11','-O2']
     } 
 response = requests.post('http://localhost:8100', json=data)
 ```
 
 
+
 ## 评测结果返回
 
 status 0 是正确返回
 result 是一个list，表示若干个测试点的评测状态。
-评测状态 0 AC 1 WA 2 RE 3 TLE 4 MLE 5 UKE
+评测状态 30 AC 40 WA 50 RE 70 TLE 60 MLE 90 UKE 80 CE
 
 ```python
 data = {
