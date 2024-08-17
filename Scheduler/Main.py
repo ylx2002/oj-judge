@@ -40,7 +40,7 @@ def return_result(data):
         "Content-Type": "application/json",
     }
     # data["status"] = data["result"]
-    data['result'] = int(data['result'])
+    data['status'] = int(data['status'])
     print(data)
     response = requests.post(Url_OJ_Back, json=data,headers=headers)
     return response.text
@@ -54,12 +54,12 @@ def run_judge_tasks(Url, pid, data, id):
     print(result.json())
     NodesStatus[id] = 0
     x=result.json()['result']
-    Result= {'status':0,'rid':data['rid']}
+    Result= {'rid':data['rid']}
     flag = 0
     for i in x:
         if (i != 0):
             flag = i
-    Result['result'] = flag
+    Result['status'] = flag
     Result['runtime'] = result.json()['runtime']
     # print(Result)
     return_result(Result)
