@@ -64,7 +64,7 @@ def Run(rid, pid, lang = 'c++'):# rid:记录编号 pid:题目编号
             RunResult.append(50) # RE
             continue
 
-        Time = max(Time, end_time - start_time)
+        Time = max(Time, 1000 * (end_time - start_time))
         # print(Tmp,'\n',end_time-start_time)
             
         if (end_time-start_time)*1000 > TimeLimit:
