@@ -62,7 +62,9 @@ def distribution_tasks(pid, data): # 分发评测给空闲评测机
     Num = len(NodesStatus)
     if not('language' in data): # 设一个default
         data['language'] = 'c++'
-    if data['language'] == 'C++' or data['language'] == 'cpp':
+    if data['language'] == 30:
+        data['language'] = 'python'
+    if data['language'] == 20 or data['language'] == 10:
         data['language'] = 'c++'
     print(data['language'])
     while True:
