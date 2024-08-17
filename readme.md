@@ -34,12 +34,10 @@ response = requests.post(Url_OJ_Back, data=data)
 
 压缩包内文件格式：
 ```
-{题目编号}
-|
-|-----config
-|-----1.in
-|-----1.ans
-|-----......
+config
+1.in
+1.ans
+......
 ```
 config 格式
 ```

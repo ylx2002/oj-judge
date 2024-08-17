@@ -83,11 +83,13 @@ def home():
             data = {
                 "pid": "P1",
                 "rid": "R1",
+                "language": "C++" 
                 "code": "..."
                 "opt": "..."
             }
             """
             return jsonify({'status': 0}), 200
+
         file = request.files['file']
         print('get', file.filename)
         # 保存文件到本地，解压缩
@@ -104,53 +106,9 @@ def main():
         Ports.extend(file.read().split())
     for i in Ports:
         NodesStatus.append(0)
-    """
-        data = {
-            "pid": "P1",
-            "rid": "R1",
-            "code": "#include <iostream>\nusing namespace std;\nint main() {\n    int a, b, c;\n    cin >> a >> b;\n    c = a + b;\n    cout << c;\n    return 0;\n}\n// test"
-        }
-        Thread1 = threading.Thread(target = distribution_tasks, args = ('P1', data))
-        Thread1.start()
-        data['rid'] = 'R2'
-        Thread2 = threading.Thread(target = distribution_tasks, args = ('P1', data))
-        Thread2.start()
-    """
     
     app.run(host='0.0.0.0', port=8100) 
 
 
 if __name__ == "__main__":
     main()
-
-"""
-
-# 发送 POST 请求
-data = {'key': 'value'}
-response = requests.post('http://localhost:8103', json=data)
-print(response.text)  # 输出 "Received data: {'key': 'value'}"
-
-
-import threading
-import time
-
-# 定义一个函数，用于在线程中执行
-def thread_function(name):
-    for i in range(5):
-        time.sleep(1)
-        print(f"Thread {name}: {i}")
-
-# 创建多个线程
-threads = []
-for i in range(3):
-    thread = threading.Thread(target=thread_function, args=(i,))
-    threads.append(thread)
-    thread.start()
-
-# 等待所有线程完成
-for thread in threads:
-    thread.join()
-
-print("All threads have finished.")
-
-"""

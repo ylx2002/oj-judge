@@ -47,7 +47,7 @@ def home():
         # 保存文件到本地，解压缩
         file.save(f"./data/{file.filename}")
         zip_path=f"./data/{file.filename}"
-        extract_to = f"./data" 
+        extract_to = f"./data/"+data['pid'] 
         try:
             with zipfile.ZipFile(zip_path, 'r') as zip_ref:
                 zip_ref.extractall(extract_to)
