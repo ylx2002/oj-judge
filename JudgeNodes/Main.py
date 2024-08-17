@@ -23,7 +23,7 @@ def judge():
             file.write(code)
         x=run.Compile(str(rid)) # 编译记录号为 R1 的程序
         if x.returncode == 1: # CE
-            return jsonify({'result': [80], 'rid' : str(rid)}), 200
+            return jsonify({'result': [80], 'rid' : str(rid), 'runtime' : 0}), 200
 
     if lang == 'python':
         with open('./submissions/'+str(rid)+'.py', 'w') as file:

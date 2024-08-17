@@ -31,8 +31,8 @@ for i in range(N):
 
 JudgeThreads = []
 
-Url_OJ_Back = 'http://127.0.0.1:8001' # 后端Url
-# Url_OJ_Back = 'http://127.0.0.1:8001/record/update' # 后端Url
+# Url_OJ_Back = 'http://127.0.0.1:8001' # 后端Url
+Url_OJ_Back = 'http://127.0.0.1:8001/record/update' # 后端Url
 
 def return_result(data):
     headers = {
