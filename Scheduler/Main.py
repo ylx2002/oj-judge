@@ -60,6 +60,7 @@ def run_judge_tasks(Url, pid, data, id):
         if (i != 0):
             flag = i
     Result['result'] = flag
+    Result['runtime'] = result.json()['runtime']
     # print(Result)
     return_result(Result)
     return 0
